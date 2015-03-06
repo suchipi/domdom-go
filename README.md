@@ -39,7 +39,7 @@ GLOBAL OPTIONS:
    --version, -v                                print the version
    
 suchipi@debian:~/anime# echo $DOMDOM_KEY
-<REDACTED>
+&lt;REDACTED&gt;
 suchipi@debian:~/anime# echo $DOMDOM_OUTPUTDIR
 .
 suchipi@debian:~/anime# domdom-go listepisodes
