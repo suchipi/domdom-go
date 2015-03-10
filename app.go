@@ -26,7 +26,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "domdom-go"
 	app.Usage = "Download Anime!"
-	app.Version = "0.1.0"
+	app.Version = "0.1.1"
 	app.Author = "Suchipi Izumi"
 	app.Email = "me@suchipi.com"
 
@@ -42,12 +42,6 @@ func main() {
 			Value:  "",
 			Usage:  "DomDomSoft Anime Downloader key. Without a key, there is a limit of 5 episodes downloaded per 24 hours.",
 			EnvVar: "DOMDOM_KEY",
-		},
-		cli.StringFlag{
-			Name:   "animelist, l",
-			Value:  "~/.domdom_anime_list",
-			Usage:  "Location to save/load anime list",
-			EnvVar: "DOMDOM_ANIMELIST",
 		},
 	}
 
