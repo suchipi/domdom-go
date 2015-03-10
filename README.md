@@ -112,5 +112,4 @@ If you don't have a key for DomDomSoft Anime Downloader, you will only be able t
 ###Todo
 
 * Progress bar for downloads
-* Ability to search the list of available anime
 * Ability to override final save dir (in case you want to put eg "Sword Art Online II" in "Sword Art Online/Season 2" instead)
