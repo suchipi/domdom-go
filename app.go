@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 
 	"github.com/codegangsta/cli"
@@ -25,7 +26,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "domdom-go"
 	app.Usage = "Download Anime!"
-	app.Version = "0.0.1"
+	app.Version = "0.1.0"
 	app.Author = "Suchipi Izumi"
 	app.Email = "me@suchipi.com"
 
@@ -52,10 +53,17 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:      "update",
-			ShortName: "u",
-			Usage:     "Update the anime list",
-			Action:    updateAction,
+			Name:      "search",
+			ShortName: "s",
+			Usage:     "Search for an anime by title",
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "regex, r, term, t",
+					Value: "",
+					Usage: "Search term. It will be evaluated as a regular expression.",
+				},
+			},
+			Action: searchAction,
 		},
 		{
 			Name:      "listepisodes",
@@ -260,4 +268,30 @@ func downloadEpisode(episode domdom.Episode, outputdir, key string, redownload, 
 		}
 	}
 	return nil
+}
+
+func searchAction(c *cli.Context) {
+	term := c.String("regex")
+	if term == "" {
+		fmt.Println("Please specify a search term.")
+		cli.ShowCommandHelp(c, "search")
+		return
+	}
+	regex, err := regexp.Compile(term)
+	check(err)
+	fmt.Println("Fetching anime list...")
+	animes, err := domdom.GetAnimeList()
+	check(err)
+	output := make([]string, 0)
+	for _, anime := range animes {
+		if regex.MatchString(anime.Title) {
+			output = append(output, fmt.Sprintf("%s (%s episodes)", anime.Title, anime.NumFiles))
+		}
+	}
+
+	for _, line := range output {
+		fmt.Println(line)
+	}
+
+	fmt.Printf("%d total result(s).\n", len(output))
 }
