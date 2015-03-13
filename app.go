@@ -150,7 +150,7 @@ func listepisodesAction(c *cli.Context) {
 	for index, episode := range episodes {
 		sizeInt, err := strconv.Atoi(episode.FileSize)
 		check(err)
-		niceSize := humanize.Bytes(uint64(sizeInt))
+		niceSize := humanize.IBytes(uint64(sizeInt))
 		fmt.Printf("%d: %s (%s)\n", index+1, episode.FileName, niceSize)
 	}
 }
@@ -232,7 +232,7 @@ func downloadEpisode(episode domdom.Episode, outputdir, key string, redownload, 
 		finalPath := filepath.Join(dl.OutputDir, dl.FileName)
 		shouldDownload := true
 
-		fmt.Printf("Part %d of %d: %s (%s)\n", index+1, len(links), dl.FileName, humanize.Bytes(dl.FileSize))
+		fmt.Printf("Part %d of %d: %s (%s)\n", index+1, len(links), dl.FileName, humanize.IBytes(dl.FileSize))
 
 		if _, err := os.Stat(finalPath); err == nil {
 			fmt.Printf("File %s exists... ", dl.FileName)
