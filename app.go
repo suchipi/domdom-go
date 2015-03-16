@@ -252,6 +252,10 @@ func downloadEpisode(episode domdom.Episode, outputdir, key string, redownload, 
 		zip_parts[index] = filepath.Join(outputdir, dl.FileName)
 	}
 
+	if len(zip_parts) == 1 && filepath.Ext(zip_parts[0]) != ".zip" && filepath.Ext(zip_parts[0]) != ".part" {
+		fmt.Printf("%s does not appear to be a zip file, so not unzipping.\n", episode.FileName)
+		return nil
+	}
 	fmt.Printf("Unzipping file %s from %d parts...\n", episode.FileName, len(zip_parts))
 	err = unzip.Multiple(zip_parts, outputdir)
 	check(err)
