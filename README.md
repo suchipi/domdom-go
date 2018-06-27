@@ -93,7 +93,7 @@ suchipi@debian:~/anime# ls Kantai\ Collection/
 suchipi@debian:~/anime# 
 </pre>
 
-###Building
+### Building
 
 Building is the same as (almost) any go project:
 <pre>
@@ -105,11 +105,11 @@ go install github.com/suchipi/domdom-go
 </pre>
 After these steps, the `domdom-go` binary will reside in `$GOPATH/bin`.
 
-###Notes
+### Notes
 
 If you don't have a key for DomDomSoft Anime Downloader, you will only be able to download 5 episodes per 24 hours.
 
-###Todo
+### TODO
 
 * Progress bar for downloads
 * Ability to override final save dir (in case you want to put eg "Sword Art Online II" in "Sword Art Online/Season 2" instead)
